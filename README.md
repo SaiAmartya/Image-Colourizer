@@ -11,3 +11,6 @@ Important libraries needed include:
 - Pytorch
 - Torchvision
 - Scikit-Image
+
+## Learning Resources
+Most of my learning process and resources used are linked in this repository: [LearningPytorch](https://github.com/SaiAmartya/LearningPytorch)
