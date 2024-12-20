@@ -14,3 +14,6 @@ Important libraries needed include:
 
 ## Learning Resources
 Most of my learning process and resources used are linked in this repository: [LearningPytorch](https://github.com/SaiAmartya/LearningPytorch)
+
+## [IN PROGRESS]
+Image Colourizer Training/Testing implemented in google colab: [Notebook](https://colab.research.google.com/drive/1as_sPWGZ5A1jBX2AOV8SkTD8Wx_DH3DU?usp=sharing)
