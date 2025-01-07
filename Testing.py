@@ -9,18 +9,20 @@ from skimage.color import lab2rgb
 import matplotlib.pyplot as plt
 import time
 
-device = torch.device('mps' if torch.backends.mps.is_available() else 'cpu') # mps to use apple metal performance shaders; to run on mac. Otherwise 'cuda' for google colab.
+# mps to use apple metal performance shaders; to run on mac. Otherwise 'cuda' for google colab.
+device = torch.device('mps' if torch.backends.mps.is_available() else 'cpu')
 
 # Load test data
 test_dataset = ColorizationDataset(test_black_path, test_color_path, transform=transform)
 test_loader = DataLoader(test_dataset, batch_size=1, shuffle=False)
 
-print('device:', device) # Debugging; make sure it runs on gpu
+print('device:', device) # Ensure it runs on gpu
 
 # Load the trained model
 model = Network().to(device)
 model_path = '/Users/saiamartya/Desktop/PythonPrograms/Image-Colourizer/models/colorization_net.pth'
 
+# Ensure model exists in path
 if os.path.exists(model_path):
   model.load_state_dict(torch.load(model_path, map_location=device))
 else:
@@ -66,14 +68,12 @@ def visualize_results(L_channel, ab_channels, predicted_ab, loss):
   # true rgb image
   true_rgb = torch.cat((L_channel, ab_channels), dim=0) # Merge the channels across the channel dimension; dimension 0
   true_rgb = true_rgb.permute(1, 2, 0).numpy() # change to LAB shape from standard tensor shape, shape: (400, 400, 3)
-  true_rgb = lab2rgb(true_rgb) # Will have values ranged [0, 1]
-  # true_rgb = Image.fromarray((true_rgb*255).astype(np.uint8)) # scale values back to [0, 255] and convert to PIL format, PIL Image Format
+  true_rgb = lab2rgb(true_rgb) # Values ranged [0, 1]
 
   # predicted rgb image
   pred_rgb = torch.cat((L_channel, predicted_ab), dim=0)
   pred_rgb = pred_rgb.permute(1, 2, 0).numpy()
   pred_rgb = lab2rgb(pred_rgb)
-  # pred_rgb = Image.fromarray((pred_rgb*255).astype(np.uint8)) # PIL Image Format
   
   return gray, true_rgb, pred_rgb, loss
 
@@ -87,7 +87,7 @@ criterion = torch.nn.MSELoss() # Define loss function; mean squared error
 start = time.time()
 print("Started testing...")
 
-with torch.no_grad(): # Disable model gradients for testing
+with torch.no_grad(): # Disable model gradients for testing loop
   for batch, (L_channel, ab_channels) in enumerate(test_loader):
     # Move channels to same device
     L_channel = L_channel.to(device)
