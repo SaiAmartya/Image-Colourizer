@@ -28,15 +28,15 @@ class ColorizationDataset(Dataset):
     color_img_lab = rgb2lab(np.array(color_img))
     ab_channels = color_img_lab[:, :, 1:]  # Color channels, model should try to generate these
 
-    # Apply data transformations if specified
+    # Apply data transformations if specified; transforming pil image to tensor
     if self.transform:
         black_img = self.transform(black_img)
         ab_channels = self.transform(ab_channels)
 
-    return black_img, torch.tensor(ab_channels, dtype=torch.float32)
+    return black_img, torch.tensor(ab_channels, dtype=torch.float32) # Returns L_channel, ab_channels as tensors
 
 # Set up data transformations
-transform = transforms.Compose([transforms.ToTensor()]) # Convert PIL Image object to Tensor
+transform = transforms.Compose([transforms.ToTensor()]) # Convert Numpy Arrays to Tensor
 
 # Define dataset paths, repeated from previous "testing" code cell
 path = "/Users/saiamartya/Desktop/PythonPrograms/Image-Colourizer/data" # Dataset directories
