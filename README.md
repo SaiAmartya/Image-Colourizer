@@ -3,6 +3,8 @@ This is the repository of an autoencoder model that converts black-and-white ima
 
 The training and testing dataset used is the [Image-Colourization-Dataset](https://www.kaggle.com/datasets/aayush9753/image-colorization-dataset).
 
+This kaggle dataset must be stored in a "data" directory with the main programs.
+
 ## Requirements
 Here is the requirements document for the colourizer: [Requirements](https://docs.google.com/document/d/17pzGwoIqIhhMRrc7eZbiCiMEfnEUco78iabRo-hJ5ho/edit?usp=sharing)
 
