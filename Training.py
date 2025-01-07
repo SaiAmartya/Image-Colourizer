@@ -10,7 +10,7 @@ import time
 
 # Hyperparemeters
 learning_rate = 0.001
-epochs = 300
+epochs = 100
 batch_size = 32
 
 # Device configuration: Makes sure pytorch uses gpu if available
