@@ -1,0 +1,140 @@
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #ffffff, #e3f2fd);
+    background-attachment: fixed;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 3em;
+    color: #007bff;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+h2.section-title {
+    font-size: 1.8em;
+    color: #007bff;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+h3 {
+    color: #007bff;
+    margin-bottom: 15px;
+    margin-top: 0;
+}
+
+p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+    margin: 20px auto;
+    width: 80%;
+    text-align: center;
+}
+
+/* SECTION CONTAINER */
+.section-container {
+    background-color: #f8fbff;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    margin: 20px auto;
+    padding: 20px;
+    width: 90%;
+}
+
+/* FORM SECTION */
+.form-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-section label, 
+.form-section select, 
+.form-section input[type="file"],
+.form-section input[type="submit"] {
+    margin: 10px;
+    font-size: 1em;
+    width: 80%;
+    max-width: 300px;
+    text-align: left;
+}
+
+.form-section select,
+.form-section input[type="file"] {
+    padding: 6px;
+    background-color: #bdddff;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    outline: none;
+    color: #333;
+}
+
+.form-section input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    width: auto;
+}
+
+.form-section input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* IMAGE CONTAINERS */
+.uploaded-image-container, 
+.image-results {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 900px;
+}
+
+.uploaded-image-container img {
+    max-width: 400px;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+}
+
+.image-results {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.image-container {
+    position: relative;
+    margin: 15px;
+}
+
+.image-container img {
+    border-radius: 8px;
+    border: 2px solid #007bff;
+    max-width: 300px;
+}
+
+.label {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 123, 255, 0.8);
+    color: white;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+}
