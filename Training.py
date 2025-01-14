@@ -5,12 +5,11 @@ from torch.utils.data import DataLoader
 from Network import Network
 from Dataset import train_dataset
 import matplotlib.pyplot as plt
-import os
 import time
 
 # Hyperparemeters
 learning_rate = 0.001
-epochs = 100
+epochs = 150
 batch_size = 32
 
 # Device configuration: Makes sure pytorch uses gpu if available
@@ -59,19 +58,20 @@ for epoch in range(epochs):
 
 print(f"Model Trained in:{(time.time() - start) / 60:.4f} minutes")
 
+
 # Save the trained model
-os.makedirs('models', exist_ok=True)
-model_path = 'models/colorization_net.pth'
+# os.makedirs('models', exist_ok=True) # if previous models werent saved already
+model_path = 'models/new_colorization_net.pth'
 torch.save(model.state_dict(), model_path)
 print(f"Model saved to {model_path}")
 
 # Also save the optimizer for future training
-torch.save(optimizer.state_dict(), 'models/optimizer_state.pth')
+torch.save(optimizer.state_dict(), 'models/new_optimizer_state.pth')
 
 # Plot the loss curve
 plt.figure(figsize=(10, 6))
 plt.plot(range(1, len(losses) + 1), losses, marker='o', label='Loss per 150 batches')
-plt.xlabel('Steps (x4800 Images)')
+plt.xlabel('Steps (x4800 Image Pairs)')
 plt.ylabel('Loss')
 plt.title('Training Loss Over Time')
 plt.legend()
