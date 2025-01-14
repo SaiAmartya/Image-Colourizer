@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+    <h1>AI Image Colourizer</h1>
+    <p>Upload or choose a 400x400 grayscale image to colorize it automatically.</p>
+    
+    {% if error_message %}
+    <div class="error">
+        {{ error_message }}
+    </div>
+    {% endif %}
+
+    <!-- UPLOAD IMAGE SECTION -->
+    <div class="section-container">
+        <h2 class="section-title">Upload Your Own Image</h2>
+        <form class="form-section" method="POST" enctype="multipart/form-data" action="/">
+            <label for="file">Upload an image (JPEG only):</label>
+            <input type="file" name="file" id="file" accept=".jpeg, .jpg">
+            
+            <label for="model-selector">Choose a model for Uploaded Image:</label>
+            <select id="model-selector" name="model">
+                <option value="100" {% if selected_model == "100" %}selected{% endif %}>100 Epochs</option>
+                <option value="300" {% if selected_model == "300" %}selected{% endif %}>300 Epochs</option>
+                <option value="new300" {% if selected_model == "new300" %}selected{% endif %}>New 300 Model</option>
+                <option value="new150" {% if selected_model == "new150" %}selected{% endif %}>New 150 Model</option>
+            </select>
+            
+            <input type="submit" value="Upload Image">
+        </form>
+    </div>
+
+    <!-- DISPLAY UPLOADED IMAGE -->
+    {% if uploaded_image %}
+    <div class="uploaded-image-container">
+        <h3>Uploaded Image Preview</h3>
+        <img src="data:image/jpeg;base64, {{ uploaded_image }}" alt="Uploaded Image">
+    </div>
+    {% endif %}
+
+    <!-- COLORED IMAGES SECTION -->
+    {% if gray_img or true_rgb or pred_rgb %}
+    <div class="image-results">
+        {% if gray_img %}
+        <div class="image-container">
+            <img src="data:image/jpeg;base64,{{ gray_img }}" alt="Gray Image">
+            <div class="label">Gray Image</div>
+        </div>
+        {% endif %}
+
+        {% if true_rgb %}
+        <div class="image-container">
+            <img src="data:image/jpeg;base64,{{ true_rgb }}" alt="True RGB Image">
+            <div class="label">True RGB Image</div>
+        </div>
+        {% endif %}
+        
+        {% if pred_rgb %}
+        <div class="image-container">
+            <img src="data:image/jpeg;base64,{{ pred_rgb }}" alt="Predicted RGB Image">
+            <div class="label">Predicted RGB Image</div>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <!-- CHOOSE AN IMAGE SECTION -->
+    <div class="section-container">
+        <h2 class="section-title">Choose an Image From the Testing Dataset</h2>
+        <form class="form-section" method="POST" action="/">
+            <label for="image-selector">Choose an image (1-700):</label>
+            <select id="image-selector" name="image">
+                {% for i in range(1, 700) %}
+                <option value="{{ i-1 }}" {% if selected_image == (i-1) %}selected{% endif %}>{{ i }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="model-selector">Choose a model:</label>
+            <select id="model-selector" name="model">
+                <option value="100" {% if selected_model == "100" %}selected{% endif %}>100 Epochs</option>
+                <option value="300" {% if selected_model == "300" %}selected{% endif %}>300 Epochs</option>
+                <option value="new300" {% if selected_model == "new300" %}selected{% endif %}>New 300 Model</option>
+                <option value="new150" {% if selected_model == "new150" %}selected{% endif %}>New 150 Model</option>
+            </select>
+            
+            <input type="submit" name="submit" value="Choose Image">
+        </form>
+    </div>
+    <p6>Created by Sai Amartya.</p6>
+</body>
+</html>
