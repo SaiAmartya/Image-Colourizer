@@ -1,13 +1,16 @@
-from Network import Network
 import os
-from torch.utils.data import DataLoader
-from Dataset import ColorizationDataset, test_black_path, test_color_path, transform
 import torch
+import time
 import numpy as np
+import matplotlib.pyplot as plt
+
 from PIL import Image
 from skimage.color import lab2rgb
-import matplotlib.pyplot as plt
-import time
+from torch.utils.data import DataLoader
+
+from Network import Network
+from Dataset import ColorizationDataset, test_black_path, test_color_path, transform
+
 
 def plot_all_results(results, average_loss):
   num_images = len(results)
@@ -42,7 +45,7 @@ def visualize_results(L_channel, ab_channels, predicted_ab, loss=None):
   predicted_ab = predicted_ab.squeeze().cpu() # shape: (2, 400, 400)
   
   # grayscale original image
-  gray = Image.fromarray((L_channel.numpy() * 255).astype(np.uint8)) # Make numpy array compatible for PIL image
+  gray = Image.fromarray((L_channel.numpy() * 255).astype(np.uint8))
 
   L_channel = L_channel.unsqueeze(0) * 100 # Scale back to [0, 100] for LAB
 
@@ -62,7 +65,7 @@ def visualize_results(L_channel, ab_channels, predicted_ab, loss=None):
 
 # Only run if it's this program running
 if __name__ == '__main__': 
-     # mps to use apple metal performance shaders; to run on mac. Otherwise 'cuda' for google colab.
+  # use gpu, fallback is cpu
   device = torch.device('mps' if torch.backends.mps.is_available() else 'cpu')
 
   # Load test data
