@@ -1,0 +1,7 @@
+Flask==2.3.2
+torch==2.0.1
+numpy==1.26.0
+Pillow==10.0.0
+scikit-image==0.21.0
+matplotlib==3.8.0
+Werkzeug==2.3.7
