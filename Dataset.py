@@ -41,7 +41,8 @@ class ColorizationDataset(Dataset):
 transform = transforms.Compose([transforms.ToTensor()]) # Convert Numpy Arrays to Tensor
 
 # Define dataset paths, repeated from previous "testing" code cell
-path = "/Users/saiamartya/Desktop/PythonPrograms/Image-Colourizer/data" # Dataset directories
+path = os.path.join(os.getcwd(), "data") # Dataset directories
+# path = "/Users/saiamartya/Desktop/PythonPrograms/Image-Colourizer/data" # Dataset directories
 
 # Define paths to dataset
 test_black_path = os.path.join(path, "test_black")
