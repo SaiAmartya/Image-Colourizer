@@ -1,11 +1,13 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch.utils.data import DataLoader
-from Network import Network
-from Dataset import train_dataset
 import matplotlib.pyplot as plt
 import time
+
+from torch.utils.data import DataLoader
+
+from Network import Network
+from Dataset import train_dataset
 
 # Hyperparemeters
 learning_rate = 0.001
