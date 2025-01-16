@@ -1,10 +1,12 @@
 import torch
 import os
-from torch.utils.data import Dataset
-from torchvision import transforms
 import numpy as np
+
 from skimage.color import rgb2lab
 from PIL import Image
+
+from torch.utils.data import Dataset
+from torchvision import transforms
 
 class ColorizationDataset(Dataset):
   def __init__(self, black_dir, color_dir, transform=None):
