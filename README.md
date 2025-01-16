@@ -1,7 +1,7 @@
 # CNN Image-Colourizer
 This is the repository of an autoencoder model that converts black-and-white images to colour.
 
-# General Info
+## General Info
 You can upload or select black and white images for the AI to colourize. The images will be resized to 400x400 before being displayed. 
 
 ## Setup
