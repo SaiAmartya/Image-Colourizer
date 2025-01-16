@@ -1,19 +1,19 @@
-# Hyperparemeters
+# Import necessary libraries
 
-# Device configuration (what to use for training)
+# Hyperparemeters
+# Device configuration(gpu)
 
 # Load data
+# Initialize model, loss function & optimizer
 
-# initialize model, loss function & optimizer
-
-# training loop
-  # Grayscale input
-  # Colour target
-
+# TRAINING LOOP
+  # Move channels to device
   # Forward Pass
-
+    # Grayscale input
+    # Compare with colour target
   # Backward Pass
-
-# Print epoch loss
+  # Record loss
+  # Print epoch loss
 
 # Save trained model
+# Plot loss curve

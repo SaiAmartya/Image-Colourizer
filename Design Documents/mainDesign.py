@@ -1,11 +1,19 @@
-# import argparse
-# from training import train
-# from testing import test
+# Import required libraries
 
-# Main function
-  # set up argument parser
-  # define argument to either training or testing
+# Flask app config
+# Upload images directory
+# Device configuration
+# Model setup
 
-  # check the model and call the appropriate function
+# UTILS FUNCTIONS
+  # Load model
+  # Convert to base64
+  # Colourize
+  # Display images
 
-# Ensure the script runs only when its directly executed
+# ROUTES
+  # Handle uploaded files
+  # Handle selected files
+  # Handle default GET request
+
+# Run flask application when directly executed
