@@ -3,7 +3,7 @@ import os
 from PIL import Image
 from Dataset import ColorizationDataset
 
-path = "/Users/saiamartya/Desktop/PythonPrograms/Image-Colourizer/data"
+path = path = os.path.join(os.getcwd(), "data")  # Dataset directories
 
 # Define paths to dataset
 test_black_path = os.path.join(path, "test_black")
