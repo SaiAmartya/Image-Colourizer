@@ -2,11 +2,10 @@ import torch
 import os
 import numpy as np
 
-from skimage.color import rgb2lab
-from PIL import Image
-
 from torch.utils.data import Dataset
 from torchvision import transforms
+from skimage.color import rgb2lab
+from PIL import Image
 
 class ColorizationDataset(Dataset):
   def __init__(self, black_dir, color_dir, transform=None):
@@ -38,11 +37,10 @@ class ColorizationDataset(Dataset):
     return black_img, torch.tensor(ab_channels, dtype=torch.float32) # Returns L_channel, ab_channels as tensors
 
 # Set up data transformations
-transform = transforms.Compose([transforms.ToTensor()]) # Convert Numpy Arrays to Tensor
+transform = transforms.Compose([transforms.ToTensor()]) # Convert PIL Images to Tensor
 
 # Define dataset paths, repeated from previous "testing" code cell
-path = os.path.join(os.getcwd(), "data") # Dataset directories
-# path = "/Users/saiamartya/Desktop/PythonPrograms/Image-Colourizer/data" # Dataset directories
+path = os.path.join(os.getcwd(),"data") # Dataset directories
 
 # Define paths to dataset
 test_black_path = os.path.join(path, "test_black")
