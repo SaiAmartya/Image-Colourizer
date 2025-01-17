@@ -16,8 +16,10 @@ from Testing import visualize_results
 # Flask App Configuration
 app = Flask(__name__)
 
+current_dir = os.getcwd()
+
 # Create an upload folder (relative to current working directory)
-UPLOAD_FOLDER = os.path.join(os.getcwd(), 'Upload_Folder')
+UPLOAD_FOLDER = os.path.join(current_dir, 'Upload_Folder')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)  # Same as checking and creating
 app.config['UPLOAD'] = UPLOAD_FOLDER
 
@@ -29,10 +31,10 @@ model = Network().to(device)
 
 # Keep model file paths in a dictionary for simple lookup
 MODEL_PATHS = {
-    '100':  '/Users/saiamartya/Desktop/PythonPrograms/Image-Colourizer/models/colorization_net_100.pth',
-    '300':  '/Users/saiamartya/Desktop/PythonPrograms/Image-Colourizer/models/colorization_net_300.pth',
-    'new300': '/Users/saiamartya/Desktop/PythonPrograms/Image-Colourizer/models/new_colorization_net_300.pth',
-    'new150': '/Users/saiamartya/Desktop/PythonPrograms/Image-Colourizer/models/new_colorization_net_150.pth',
+    '100':  os.path.join(current_dir,'models/colorization_net_100.pth'),
+    '300':  os.path.join(current_dir,'models/colorization_net_300.pth'),
+    'new300': os.path.join(current_dir, 'models/new_colorization_net_300.pth'),
+    'new150': os.path.join(current_dir, 'models/new_colorization_net_150.pth')
 }
 
 def load_model(version: str):
@@ -48,7 +50,7 @@ def convert_to_base64(pil_image: Image.Image) -> str:
     pil_image.save(buffered, format='JPEG')
     return base64.b64encode(buffered.getvalue()).decode('utf-8')
 
-def display_images(image_sample):
+def display_images(image_sample: tuple[torch.Tensor, torch.Tensor]) -> tuple[str, str, str]:
     """
     Given a sample from the dataset:
       - image_sample[0] is the L-channel
@@ -89,8 +91,8 @@ def colourize(image_tensor: torch.Tensor) -> str:
 
         # Scale L channel and combine with predicted AB
         L_channel = L_channel.unsqueeze(0) * 100
-        pred_rgb = torch.cat((L_channel, predicted_ab), dim=0)
-        pred_rgb = pred_rgb.permute(1, 2, 0).numpy()
+        pred_rgb = torch.cat((L_channel, predicted_ab), dim=0) # Shape: (3, 400, 400)
+        pred_rgb = pred_rgb.permute(1, 2, 0).numpy() # Shape: (400, 400, 3)
         pred_rgb = lab2rgb(pred_rgb)
 
         # Convert to PIL and then Base64
@@ -117,8 +119,8 @@ def home():
                 selected_model = request.form.get('model', '100')
                 load_model(selected_model)
 
-                # Convert to grayscale tensor
-                grayscale_img = Image.open(filepath).convert('L')
+                # Convert to grayscale tensor, and ensure it's properly formated
+                grayscale_img = Image.open(filepath).convert('L').resize((400,400))
                 grayscale_tensor = transform(grayscale_img)
 
                 # Cleanup the uploaded file
@@ -171,4 +173,4 @@ def home():
 
 # Run the Flask application
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5000)
