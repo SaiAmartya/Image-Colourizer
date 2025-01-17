@@ -76,8 +76,8 @@ if __name__ == '__main__':
 
   # Load the trained model
   model = Network().to(device)
-  model_150_path = '/Users/saiamartya/Desktop/PythonPrograms/Image-Colourizer/models/new_colorization_net_150.pth'
-  model_300_path = '/Users/saiamartya/Desktop/PythonPrograms/Image-Colourizer/models/new_colorization_net_300.pth'
+  model_150_path = os.path.join(os.getcwd(), 'models/new_colorization_net_150.pth')
+  model_300_path = os.path.join(os.getcwd(), 'models/new_colorization_net_300.pth')
 
   
   # Get which model version to test from user
