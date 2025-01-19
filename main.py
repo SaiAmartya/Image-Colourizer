@@ -16,10 +16,10 @@ from Testing import visualize_results
 # Flask App Configuration
 app = Flask(__name__)
 
-current_dir = os.getcwd()
+CURRENT_DIR = os.getcwd()
 
 # Create an upload folder (relative to current working directory)
-UPLOAD_FOLDER = os.path.join(current_dir, 'Upload_Folder')
+UPLOAD_FOLDER = os.path.join(CURRENT_DIR, 'Upload_Folder')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)  # Same as checking and creating
 app.config['UPLOAD'] = UPLOAD_FOLDER
 
@@ -31,10 +31,10 @@ model = Network().to(device)
 
 # Keep model file paths in a dictionary for simple lookup
 MODEL_PATHS = {
-    '100':  os.path.join(current_dir,'models/colorization_net_100.pth'),
-    '300':  os.path.join(current_dir,'models/colorization_net_300.pth'),
-    'new300': os.path.join(current_dir, 'models/new_colorization_net_300.pth'),
-    'new150': os.path.join(current_dir, 'models/new_colorization_net_150.pth')
+    '100':  os.path.join(CURRENT_DIR,'models/colorization_net_100.pth'),
+    '300':  os.path.join(CURRENT_DIR,'models/colorization_net_300.pth'),
+    'new300': os.path.join(CURRENT_DIR, 'models/new_colorization_net_300.pth'),
+    'new150': os.path.join(CURRENT_DIR, 'models/new_colorization_net_150.pth')
 }
 
 def load_model(version: str):
